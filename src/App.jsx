@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import WhatWeDo from './components/WhatWeDo';
 import WhoWeAre from './components/WhoWeAre';
+import Clients from './components/Clients';
 import WhatWeOffer from './components/WhatWeOffer';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
@@ -18,6 +19,7 @@ export default function App() {
         <Hero />
         <WhatWeDo />
         <WhoWeAre />
+        <Clients />
         <WhatWeOffer />
         <Testimonials />
         <Contact />

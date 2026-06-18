@@ -4,6 +4,7 @@ import { motion, useScroll } from 'framer-motion';
 const navLinks = [
   { label: 'What We Do', href: '#what-we-do' },
   { label: 'Who We Are', href: '#who-we-are' },
+  { label: 'Our Clients', href: '#clients' },
   { label: 'What We Offer', href: '#what-we-offer' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
