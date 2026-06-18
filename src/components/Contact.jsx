@@ -13,11 +13,31 @@ const slideUp = {
 
 export default function Contact() {
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus('submitting');
+    try {
+      const res = await fetch('https://formspree.io/f/mqeovzeo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName:  form.lastName,
+          email:     form.email,
+          message:   form.message,
+        }),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setForm({ firstName: '', lastName: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -142,7 +162,7 @@ export default function Contact() {
 
           {/* Right — form */}
           <motion.div variants={slideUp}>
-            {submitted ? (
+            {status === 'success' ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -155,10 +175,10 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-medium" style={{ fontFamily: '"Playfair Display", Georgia, serif', color: '#F8F4EF' }}>
-                  Thank You
+                  Message Sent
                 </h3>
                 <p className="text-sm font-light" style={{ color: 'rgba(248, 244, 239, 0.6)', fontFamily: 'Inter, system-ui, sans-serif' }}>
-                  We'll be in touch shortly.
+                  Thank you — we'll be in touch shortly.
                 </p>
               </motion.div>
             ) : (
@@ -248,19 +268,36 @@ export default function Contact() {
                   />
                 </div>
 
+                {status === 'error' && (
+                  <p className="text-xs" style={{ color: '#E57373', fontFamily: 'Inter, system-ui, sans-serif' }}>
+                    Something went wrong — please try again or email us directly at info@reachhospitality.com
+                  </p>
+                )}
+
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02, boxShadow: '0 0 32px rgba(201, 168, 76, 0.35)' }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-8 py-4 text-sm tracking-widest uppercase font-medium transition-all duration-300 mt-2"
+                  disabled={status === 'submitting'}
+                  whileHover={status !== 'submitting' ? { scale: 1.02, boxShadow: '0 0 32px rgba(201, 168, 76, 0.35)' } : {}}
+                  whileTap={status !== 'submitting' ? { scale: 0.98 } : {}}
+                  className="px-8 py-4 text-sm tracking-widest uppercase font-medium transition-all duration-300 mt-2 flex items-center justify-center gap-2"
                   style={{
-                    background: 'linear-gradient(135deg, #C9A84C 0%, #D4B86A 50%, #A8862E 100%)',
+                    background: status === 'submitting'
+                      ? 'rgba(201, 168, 76, 0.5)'
+                      : 'linear-gradient(135deg, #C9A84C 0%, #D4B86A 50%, #A8862E 100%)',
                     color: '#0A1628',
                     fontFamily: 'Inter, system-ui, sans-serif',
                     letterSpacing: '0.14em',
+                    cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                   }}
                 >
-                  Submit
+                  {status === 'submitting' ? (
+                    <>
+                      <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 12a9 9 0 11-6.219-8.56"/>
+                      </svg>
+                      Sending…
+                    </>
+                  ) : 'Send Message'}
                 </motion.button>
               </form>
             )}
