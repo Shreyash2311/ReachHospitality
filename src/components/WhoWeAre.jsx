@@ -74,7 +74,10 @@ export default function WhoWeAre() {
             <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
               <img
                 src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=900&q=80&fit=crop&auto=format"
-                alt="Luxury resort exterior"
+                alt="Luxury resort exterior — 26 years of hotel and resort consulting experience"
+                width="900"
+                height="1125"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               {/* Gold frame accent */}

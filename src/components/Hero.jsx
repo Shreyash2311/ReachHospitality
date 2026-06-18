@@ -31,8 +31,10 @@ export default function Hero() {
       >
         <img
           src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80&fit=crop&auto=format"
-          alt=""
-          role="presentation"
+          alt="Luxury hotel lobby — REACH Hospitality consulting services"
+          width="1920"
+          height="1080"
+          fetchpriority="high"
           className="w-full h-full object-cover"
           onError={e => { e.target.style.display = 'none'; }}
         />

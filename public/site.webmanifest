@@ -1,0 +1,16 @@
+{
+  "name": "REACH Hospitality",
+  "short_name": "REACH",
+  "description": "Luxury Hotel & Resort Management Consulting | Jackson, WY",
+  "start_url": "/ReachHospitality/",
+  "display": "standalone",
+  "background_color": "#0A1628",
+  "theme_color": "#C9A84C",
+  "icons": [
+    {
+      "src": "/ReachHospitality/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

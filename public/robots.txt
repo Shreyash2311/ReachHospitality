@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shreyash2311.github.io/ReachHospitality/sitemap.xml
